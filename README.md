@@ -84,6 +84,50 @@ Run per-view consistency QA
 Deliver the reference pack for IP Asset Generator
 ```
 
+## Copyable prompts
+
+### Image-only mode
+
+```text
+Use character-turnaround in image-only mode.
+
+Generate four independent character reference images:
+1. front
+2. three-quarter front
+3. side
+4. back
+
+Do not create a Character Bible.
+If the front reference does not reveal the back details, ask whether I allow
+conservative completion before generating.
+```
+
+### Character Bible mode
+
+```text
+Use character-turnaround in Character Bible mode.
+
+First analyze this front-facing character reference and organize:
+- confirmed features
+- reasonable inferences
+- details that need confirmation
+- identity anchors
+- fixed rules
+- allowed variations
+
+Do not generate images yet. Wait for me to confirm the Character Bible.
+```
+
+After confirming the Bible:
+
+```text
+The Character Bible is confirmed.
+
+Generate four independent character reference images:
+front, three-quarter front, side, and back.
+Run consistency QA after generation.
+```
+
 ## Core output
 
 ```text

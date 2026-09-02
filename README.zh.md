@@ -81,6 +81,48 @@ Character Bible 已確認。
 交付給 IP Asset Generator 使用
 ```
 
+## 可直接複製的使用指令
+
+### 純圖片模式
+
+```text
+使用 character-turnaround 的純圖片模式。
+
+請生成四張獨立角色基準圖：
+1. 正面
+2. 四分之三正面
+3. 側面
+4. 背面
+
+不要建立 Character Bible。
+如果正面圖無法確認背面細節，請先詢問我是否允許保守補完。
+```
+
+### 角色設定模式
+
+```text
+使用 character-turnaround 的角色設定模式。
+
+請先分析這張正面角色參考圖，整理：
+- 已確認特徵
+- 合理推測
+- 待確認內容
+- identity anchors
+- fixed rules
+- allowed variations
+
+先不要生成圖片，等我確認 Character Bible 後再繼續。
+```
+
+確認 Bible 後：
+
+```text
+Character Bible 已確認。
+
+請生成正面、四分之三正面、側面與背面四張獨立角色基準圖，
+並在生成後執行一致性 QA。
+```
+
 ## 核心輸出
 
 ```text
