@@ -15,6 +15,12 @@
 - 生成四張比例、基準線、站姿與畫風一致的獨立圖片。
 - 逐視角執行 QA，且只重試失敗視角一次。
 
+## 純圖片模式
+
+如果只想要圖片，可以使用純圖片模式。Skill 仍會在內部擷取必要的身份錨點，並確認重要的未知細節，但不建立或交付 `character-bible.yaml` 與 `turnaround-qa.yaml`，最後只交付四張圖片與簡短 QA 結論。
+
+如果日後要長期使用 `ip-asset-generator` 經營 IP，再改用完整 Character Bible 流程。
+
 ## 快速開始
 
 ### 安裝到 Codex
@@ -37,6 +43,14 @@ git clone https://github.com/Xuanwinnie/character-turnaround.git \
 使用 character-turnaround 分析這張正面角色參考圖。
 請先建立 Character Bible 規劃，並區分已確認、合理推測與待確認內容。
 在我確認設定前，不要生成正式角色參考圖。
+```
+
+如果只需要圖片：
+
+```text
+使用 character-turnaround 的純圖片模式。
+只生成正面、四分之三正面、側面與背面四張獨立圖片，
+不要建立 Character Bible。如果看不到背面細節，請先詢問我是否允許保守補完。
 ```
 
 確認設定後：

@@ -15,6 +15,12 @@ It is designed for characters, mascots, branded IP, games, animation, comics, an
 - Generates four separate images with consistent scale, baseline, pose, and visual treatment.
 - Runs per-view QA and retries only a failed view once.
 
+## Image-only mode
+
+When the user only wants the images, use image-only mode. The Skill performs the minimum internal identity analysis and asks only for confirmation of important unknown details. It delivers the four images and a brief QA conclusion without creating or delivering `character-bible.yaml` or `turnaround-qa.yaml`.
+
+Use the full Character Bible workflow later when the character will be reused for long-term IP production with `ip-asset-generator`.
+
 ## Quick start
 
 ### Install for Codex
@@ -38,6 +44,15 @@ Use character-turnaround to analyze this front-facing character reference.
 First create a Character Bible plan and separate confirmed facts,
 reasonable inferences, and details that need confirmation.
 Do not generate the formal reference images until I confirm the settings.
+```
+
+For image-only output:
+
+```text
+Use character-turnaround in image-only mode.
+Generate only four independent images: front, three-quarter front, side, and back.
+Do not create a Character Bible. If back details are not visible, ask whether
+I allow conservative completion before generating.
 ```
 
 After confirming the settings:
