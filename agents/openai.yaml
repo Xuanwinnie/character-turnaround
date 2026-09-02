@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Turnaround"
+  short_description: "從正面角色圖建立 Character Bible 並生成四張獨立角色基準圖"
+  default_prompt: "請提供一張正面角色參考圖，建立角色設定並生成正面、四分之三正面、側面、背面四張獨立圖片。"

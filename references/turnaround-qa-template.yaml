@@ -1,0 +1,43 @@
+character_id: <character-id>
+reference_confidence: high|medium|low
+overall_status: pass|fail|needs_review
+views:
+  front:
+    file: <character-id>-front.png
+    status: pass|fail|needs_review
+    retry_count: 0
+    checks:
+      identity_anchors: pass|fail|needs_review
+      face_and_head_ratio: pass|fail|needs_review
+      body_proportions: pass|fail|needs_review
+      costume: pass|fail|needs_review
+      signature_accessories: pass|fail|needs_review
+      palette: pass|fail|needs_review
+      scale_and_baseline: pass|fail|needs_review
+      single_character_no_text: pass|fail|needs_review
+      visual_language: pass|fail|needs_review
+    failure_reasons: []
+    unknown_details_added: []
+  three_quarter_front:
+    file: <character-id>-three-quarter-front.png
+    status: pass|fail|needs_review
+    retry_count: 0
+    checks: {}
+    failure_reasons: []
+    unknown_details_added: []
+  side:
+    file: <character-id>-side.png
+    status: pass|fail|needs_review
+    retry_count: 0
+    checks: {}
+    failure_reasons: []
+    unknown_details_added: []
+  back:
+    file: <character-id>-back.png
+    status: pass|fail|needs_review
+    retry_count: 0
+    checks: {}
+    failure_reasons: []
+    unknown_details_added: []
+consistency_notes: []
+limitations: []
