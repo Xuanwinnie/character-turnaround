@@ -57,6 +57,11 @@ materials: []
 expression_vocabulary: []
 costume: {}
 signature_accessories: []
+output_requirements:
+  width: <pixels>
+  height: <pixels>
+  transparent_background: false
+  preserve_original_front: true
 turnaround_requirements:
   views: [front, three_quarter_front, side, back]
   separate_images: true
@@ -65,7 +70,7 @@ turnaround_requirements:
 
 未知欄位使用 `needs_confirmation` 或明確的 `status`，不要用看似確定的空泛敘述填滿。`allowed_variations` 只列可變項目；物種／角色定位、臉型、身體比例、主色、永久標記、招牌配件與視覺語言原則上不得變更。
 
-## 三視圖生成
+## 角色基準圖生成
 
 核心輸出是四張獨立圖片：正面、四分之三正面、側面、背面。先保留原始正面圖。若使用者要求保留它，`character-front.png` 可直接引用原始檔，不必重新生成；若要求統一畫布或重新繪製，才生成新的正面圖。其餘三個視角必須各自獨立生成，每張只含一個角色。
 
@@ -73,7 +78,7 @@ turnaround_requirements:
 
 生成 prompt 順序：身份鎖定與參考圖用途 → 必須保留的 3–8 個錨點與 fixed rules → 唯一視角 → 中性站姿、畫布、比例、基準線與鏡頭 → visual language、配色、材質、光線 → hard avoids 與未知細節政策。
 
-如果圖像生成工具可用，逐張生成並回傳圖片；不可將未生成的結果說成已完成。若工具不可用，輸出三份可複製 prompt，明確說明尚未產生圖片。
+如果圖像生成工具可用，逐張生成並回傳圖片；不可將未生成的結果說成已完成。若工具不可用，輸出四份可複製 prompt，明確說明尚未產生圖片。
 
 固定命名：
 
@@ -86,7 +91,7 @@ turnaround_requirements:
 turnaround-qa.yaml
 ```
 
-沒有角色 ID 時使用 `character-front.png`、`character-three-quarter-front.png`、`character-side.png`、`character-back.png`、`character-bible.yaml`。
+有角色 ID 時使用 `<character-id>-bible.yaml`；沒有角色 ID 時使用 `character-bible.yaml`。圖片檔案則使用 `character-front.png`、`character-three-quarter-front.png`、`character-side.png`、`character-back.png`。
 
 ## QA 與重試
 

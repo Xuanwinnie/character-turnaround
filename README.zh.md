@@ -80,6 +80,8 @@ turnaround-qa.yaml
 
 若使用者要求保留原始正面圖，可直接將它作為正面參考，不必重新生成。四分之三正面圖可補足臉部身份與側面結構之間的視覺連續性。
 
+若有角色 ID，Character Bible 使用 `<character-id>-bible.yaml`；沒有角色 ID 時使用 `character-bible.yaml`。
+
 ## Character Bible 與 IP Bible
 
 `character-bible.yaml` 是角色轉面階段使用的 IP Bible，沿用 `ip-asset-generator` 的核心欄位：

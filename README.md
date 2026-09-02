@@ -80,7 +80,7 @@ Deliver the reference pack for IP Asset Generator
 turnaround-qa.yaml
 ```
 
-The original front reference may be retained as the front image when requested. The three-quarter front view is included because it provides a stronger bridge between facial identity and side-view structure.
+The original front reference may be retained as the front image when requested. If a character ID is available, use `<character-id>-bible.yaml`; otherwise use `character-bible.yaml`. The three-quarter front view is included because it provides a stronger bridge between facial identity and side-view structure.
 
 ## Character Bible and IP Bible
 

@@ -12,6 +12,7 @@
 - `needs_confirmation`：尚未由使用者決定、但會影響轉面或後續生成的問題。
 - `allowed_variations`：可依任務改變的動作、表情、場景、功能性道具、季節性配件等；三視圖本身不應使用這些變化。
 - `forbidden_changes`：不得擅自更改的內容，尤其是物種／角色定位、比例、主色、永久標記、招牌配件與畫風。
+- `output_requirements`：記錄輸出寬高、透明背景與是否保留原始正面圖，避免生成時遺失使用者的交付要求。
 
 ## 最小模板
 
@@ -63,6 +64,11 @@ costume:
   confirmed: []
   inferred: []
 signature_accessories: []
+output_requirements:
+  width: 1024
+  height: 1024
+  transparent_background: false
+  preserve_original_front: true
 turnaround_requirements:
   views: [front, three_quarter_front, side, back]
   separate_images: true
