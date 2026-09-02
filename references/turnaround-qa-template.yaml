@@ -10,6 +10,7 @@ views:
       identity_anchors: pass|fail|needs_review
       face_and_head_ratio: pass|fail|needs_review
       body_proportions: pass|fail|needs_review
+      proportion_lock: pass|fail|needs_review
       costume: pass|fail|needs_review
       signature_accessories: pass|fail|needs_review
       palette: pass|fail|needs_review

@@ -13,6 +13,7 @@
 - `allowed_variations`：可依任務改變的動作、表情、場景、功能性道具、季節性配件等；三視圖本身不應使用這些變化。
 - `forbidden_changes`：不得擅自更改的內容，尤其是物種／角色定位、比例、主色、永久標記、招牌配件與畫風。
 - `output_requirements`：記錄輸出寬高、透明背景與是否保留原始正面圖，避免生成時遺失使用者的交付要求。
+- `proportion_lock`：由 AI 從參考圖估算的相對比例與畫布對齊規則。它是柔性約束，不是精確量測；每份資料都要標示來源與可信度。
 
 ## 最小模板
 
@@ -64,6 +65,18 @@ costume:
   confirmed: []
   inferred: []
 signature_accessories: []
+proportion_lock:
+  source: ai-estimated-from-reference
+  confidence: medium
+  body_ratio:
+    head_to_body: 約 1:3
+    shoulder_width: 約 1.2 個頭寬
+  canvas_alignment:
+    character_height: 畫布高度約 82%
+    feet_baseline: 距離畫布底部約 8%
+  accessory_positions: []
+  notes:
+    - 以上為視覺估算，不是實際測量值
 output_requirements:
   width: 1024
   height: 1024

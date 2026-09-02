@@ -13,6 +13,7 @@ It is designed for characters, mascots, branded IP, games, animation, comics, an
 - Locks identity anchors, fixed rules, allowed variations, and visual language.
 - Requires confirmation before formal generation.
 - Generates four separate images with consistent scale, baseline, pose, and visual treatment.
+- Estimates relative proportions from the reference image to stabilize character scale, body ratio, and accessory placement.
 - Runs per-view QA and retries only a failed view once.
 
 ## Image-only mode
@@ -20,6 +21,8 @@ It is designed for characters, mascots, branded IP, games, animation, comics, an
 When the user only wants the images, use image-only mode. The Skill performs the minimum internal identity analysis and asks only for confirmation of important unknown details. It delivers the four images and a brief QA conclusion without creating or delivering `character-bible.yaml` or `turnaround-qa.yaml`.
 
 Use the full Character Bible workflow later when the character will be reused for long-term IP production with `ip-asset-generator`.
+
+The proportion lock is estimated automatically from the reference image. It uses relative proportions and confidence levels rather than pretending to provide exact measurements. It is a soft constraint: visible reference evidence and user confirmation take priority if an estimate conflicts with them.
 
 ## Quick start
 
