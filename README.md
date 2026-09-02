@@ -1,6 +1,6 @@
 # Character Turnaround
 
-[繁體中文](README.zh.md)
+[English](README.md) · [繁體中文](README.zh.md)
 
 A reusable Skill that turns one front-facing character reference into a confirmed Character Bible and four independent character reference images: front, three-quarter front, side, and back.
 
