@@ -15,6 +15,7 @@
 - `forbidden_changes`：不得擅自更改的內容，尤其是物種／角色定位、比例、主色、永久標記、招牌配件與畫風。
 - `output_requirements`：記錄輸出寬高、透明背景與是否保留原始正面圖，避免生成時遺失使用者的交付要求。
 - `proportion_lock`：由 AI 從參考圖估算的相對比例與畫布對齊規則。它是柔性約束，不是精確量測；每份資料都要標示來源與可信度。
+- `spatial_feature_contract`：只記錄跨視角容易出錯、且需要可驗證約束的結構或特徵。每項依其類型說明所在身體面、角色自身左右、連接方式、朝向、遮擋、重複數量、圖樣／材質連續性及逐視角規則。未知值必須標為 `needs_confirmation` 或 `inferred`，不可偽裝成已確認設定。
 - `downstream_handoff`：可選的媒材交接資訊。`two_d` 記錄可用素材目標；`three_d` 只記錄已確認或明確標為推測的立體結構、材質與可動部位。它不是建模、拓撲、骨架或動畫工作的授權，也不應逼迫 `2d` 使用者填寫。
 
 ## 最小模板
@@ -68,6 +69,31 @@ costume:
   confirmed: []
   inferred: []
 signature_accessories: []
+spatial_feature_contract:
+  - id: <feature-id>
+    type: appendage|facial_feature|limb|accessory|costume|marking|other
+    priority: critical
+    status: confirmed|inferred|needs_confirmation
+    character_side: left|right|center|bilateral|not_applicable
+    spatial_definition:
+      surface_or_body_region: <所在身體面或區域>
+      attachment_or_boundary: <與身體、衣物或其他特徵的連接關係>
+      direction_or_orientation: <朝向；不適用則填 not_applicable>
+      expected_occlusion: <誰遮住誰；不適用則填 not_applicable>
+      continuity_rule: <圖樣、材質、色段、線條或輪廓如何跨視角保持連續>
+    view_rules:
+      front:
+        expected_state: <可見性、數量與必要輪廓>
+      three_quarter_front:
+        expected_state: <可見性、數量與必要輪廓>
+      side:
+        expected_state: <可見性、數量與必要輪廓>
+      back:
+        expected_state: <可見性、數量與必要輪廓>
+    fail_conditions:
+      - <不可能的附著、遮擋或穿模>
+      - <視角不符或必要特徵缺失>
+      - <圖樣、材質或左右關係無故跳變>
 proportion_lock:
   source: ai-estimated-from-reference
   confidence: medium

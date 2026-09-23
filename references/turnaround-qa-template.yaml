@@ -12,12 +12,15 @@ views:
       face_and_head_ratio: pass|fail|needs_review
       body_proportions: pass|fail|needs_review
       proportion_lock: pass|fail|needs_review
+      view_angle_and_projection: pass|fail|needs_review
+      front_back_occlusion: pass|fail|needs_review
       costume: pass|fail|needs_review
       signature_accessories: pass|fail|needs_review
       palette: pass|fail|needs_review
       scale_and_baseline: pass|fail|needs_review
       single_character_no_text: pass|fail|needs_review
       visual_language: pass|fail|needs_review
+      spatial_feature_contract: pass|fail|needs_review
       three_d_structure: not_applicable|pass|fail|needs_review
       three_d_materials_and_movement: not_applicable|pass|fail|needs_review
     failure_reasons: []
@@ -26,22 +29,53 @@ views:
     file: <character-id>-three-quarter-front.png
     status: pass|fail|needs_review
     retry_count: 0
-    checks: {}
+    checks:
+      view_angle_and_projection: pass|fail|needs_review
+      front_back_occlusion: pass|fail|needs_review
+      spatial_feature_contract: pass|fail|needs_review
     failure_reasons: []
     unknown_details_added: []
   side:
     file: <character-id>-side.png
     status: pass|fail|needs_review
     retry_count: 0
-    checks: {}
+    checks:
+      view_angle_and_projection: pass|fail|needs_review
+      front_back_occlusion: pass|fail|needs_review
+      spatial_feature_contract: pass|fail|needs_review
     failure_reasons: []
     unknown_details_added: []
   back:
     file: <character-id>-back.png
     status: pass|fail|needs_review
     retry_count: 0
-    checks: {}
+    checks:
+      view_angle_and_projection: pass|fail|needs_review
+      front_back_occlusion: pass|fail|needs_review
+      spatial_feature_contract: pass|fail|needs_review
     failure_reasons: []
     unknown_details_added: []
+spatial_feature_audit:
+  # 僅列出 Character Bible 中 priority: critical 的特徵；每一項均逐視角檢查。
+  - feature_id: <feature-id>
+    contract_status: confirmed|inferred|needs_confirmation
+    views:
+      front:
+        expected: <數量、可見性、附著點或色段規則>
+        actual: <觀察結果>
+        status: pass|fail|needs_review
+      three_quarter_front:
+        expected: <數量、可見性、附著點或色段規則>
+        actual: <觀察結果>
+        status: pass|fail|needs_review
+      side:
+        expected: <數量、可見性、附著點或色段規則>
+        actual: <觀察結果>
+        status: pass|fail|needs_review
+      back:
+        expected: <數量、可見性、附著點或色段規則>
+        actual: <觀察結果>
+        status: pass|fail|needs_review
+    fail_conditions_triggered: []
 consistency_notes: []
 limitations: []
