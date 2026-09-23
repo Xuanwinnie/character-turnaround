@@ -1,10 +1,11 @@
 # Character Bible Schema
 
-本結構沿用 IP Asset Generator 的 IP Bible 欄位，增加 `reference_confidence`、`reference_sources`、`needs_confirmation` 與 `turnaround_requirements`，讓下游能分辨已鎖定內容與 AI 補完內容。
+本結構沿用 IP Asset Generator 的 IP Bible 欄位，增加 `asset_mode`、`reference_confidence`、`reference_sources`、`needs_confirmation` 與 `turnaround_requirements`，讓 2D 與 3D 下游都能分辨已鎖定內容與 AI 補完內容。
 
 ## 欄位規則
 
 - `character_id`：穩定、短小的 kebab-case ID；未命名角色可先用 `character`。
+- `asset_mode`：`2d`、`3d` 或 `both`。未指定時使用 `2d`；它只決定可選交接資訊，不改變四視角與身份一致性的核心要求。
 - `reference_confidence`：正面圖清晰且特徵可見為 `high`；局部遮擋或畫質有限為 `medium`；只能辨識大致輪廓為 `low`。
 - `reference_sources`：列出原始圖與補充圖，包含 `path`、`role`、`notes`。
 - `identity_anchors`：每項包含 `id`、`description`、`priority`、`status`。只有 `confirmed` 的可觀察特徵可進入核心身份鎖定；`inferred` 必須標明是推測。
@@ -14,11 +15,13 @@
 - `forbidden_changes`：不得擅自更改的內容，尤其是物種／角色定位、比例、主色、永久標記、招牌配件與畫風。
 - `output_requirements`：記錄輸出寬高、透明背景與是否保留原始正面圖，避免生成時遺失使用者的交付要求。
 - `proportion_lock`：由 AI 從參考圖估算的相對比例與畫布對齊規則。它是柔性約束，不是精確量測；每份資料都要標示來源與可信度。
+- `downstream_handoff`：可選的媒材交接資訊。`two_d` 記錄可用素材目標；`three_d` 只記錄已確認或明確標為推測的立體結構、材質與可動部位。它不是建模、拓撲、骨架或動畫工作的授權，也不應逼迫 `2d` 使用者填寫。
 
 ## 最小模板
 
 ```yaml
 character_id: character
+asset_mode: 2d
 reference_confidence: medium
 reference_sources:
   - path: original-front.png
@@ -77,6 +80,22 @@ proportion_lock:
   accessory_positions: []
   notes:
     - 以上為視覺估算，不是實際測量值
+downstream_handoff:
+  two_d:
+    enabled: true
+    targets: [stickers, scenes, comics]
+  three_d:
+    enabled: false
+    targets: []
+    spatial_structure:
+      confirmed: []
+      inferred: []
+    material_notes:
+      confirmed: []
+      inferred: []
+    movable_parts:
+      confirmed: []
+      needs_confirmation: []
 output_requirements:
   width: 1024
   height: 1024
@@ -92,4 +111,4 @@ turnaround_requirements:
   unknown_detail_policy: needs_confirmation
 ```
 
-不要為了填滿 schema 而創作故事、品牌事實或背面設計。`inferred` 是建議，不是永久設定；只有使用者確認後才可移至 `confirmed` 或 `fixed_rules`。
+當 `asset_mode: 3d` 或 `both` 時，將 `downstream_handoff.three_d.enabled` 設為 `true`，並僅填入可由參考圖觀察、使用者提供或明確標示為推測的資訊。不要為了填滿 schema 而創作故事、品牌事實、背面設計、立體厚度、拓撲或骨架規格。`inferred` 是建議，不是永久設定；只有使用者確認後才可移至 `confirmed` 或 `fixed_rules`。

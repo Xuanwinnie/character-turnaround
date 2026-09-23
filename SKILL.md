@@ -5,7 +5,7 @@ description: 從一張正面角色參考圖分析角色身份、建立可重複�
 
 # Character Turnaround
 
-把一張正面角色圖整理成可供後續 IP 素材生成使用的角色基準包。核心成果是：可編輯的 Character Bible、四張獨立視角圖，以及可追溯的 QA 紀錄。本 Skill 與 `ip-asset-generator` 透過相容欄位協作，不修改或覆蓋另一個 Skill。
+把一張正面角色圖整理成可供後續 IP 素材生成使用的角色基準包。核心成果是：可編輯的 Character Bible、四張獨立視角圖，以及可追溯的 QA 紀錄。核心流程是媒材中立的：可用於 2D、3D 或兩者共用的角色參考；3D 資訊僅在需要交接建模或綁定時才加入。本 Skill 與 `ip-asset-generator` 透過相容欄位協作，不修改或覆蓋另一個 Skill。
 
 ## 入口與模式
 
@@ -21,6 +21,16 @@ description: 從一張正面角色參考圖分析角色身份、建立可重複�
 使用者未指定模式時，採「角色設定規劃」。即使使用者要求直接快速出圖，也不可跳過確認關鍵未知細節。
 
 純圖片模式的交付只包含四張圖片與簡短 QA 結論，不輸出 `character-bible.yaml` 或 `turnaround-qa.yaml`。若使用者之後要交給 `ip-asset-generator` 長期使用，應重新執行角色設定規劃，建立正式 Bible 與可保存的 QA 紀錄。
+
+## 媒材模式與下游交接
+
+在角色設定規劃中，確認 `asset_mode: 2d|3d|both`。未指定時預設為 `2d`，不可要求 2D 使用者補填建模、拓撲或骨架資訊。
+
+- **2d**：以畫風、線條、色彩、平面遮擋與後續插畫、貼圖、漫畫或場景素材為重點。
+- **3d**：在共用身份與空間規則之外，確認可觀察的厚度、立體結構、材質、可動部位與建模限制；未知內容仍必須列入 `needs_confirmation` 或標示為推測。
+- **both**：維持一份共用 Bible，2D 與 3D 欄位各自可選填；不可讓 3D 的推測覆寫已確認的 2D 身份錨點或視覺語言。
+
+`downstream_handoff.two_d` 與 `downstream_handoff.three_d` 是可選欄位，描述後續用途而非啟動生成、建模、LoRA 訓練或綁定工作。本 Skill 不內建 3D mesh、rig、拓撲或動畫製作流程。
 
 ## 分析規則
 
@@ -45,7 +55,7 @@ description: 從一張正面角色參考圖分析角色身份、建立可重複�
 
 ## 確認閘門
 
-正式生成前，呈現簡潔確認卡，至少包含：角色身份、身份錨點、固定外觀、服裝／配件、色彩與畫風、待確認的側面／背面細節，以及是否允許依整體風格合理補完。使用者未確認前，只能提供規劃與 prompt 草稿，不得生成正式基準圖。
+正式生成前，呈現簡潔確認卡，至少包含：角色身份、媒材模式、身份錨點、固定外觀、服裝／配件、色彩與畫風、待確認的側面／背面細節，以及是否允許依整體風格合理補完。當模式為 `3d` 或 `both` 時，再列出已確認與待確認的立體結構、材質與可動部位；使用者未確認前，只能提供規劃與 prompt 草稿，不得生成正式基準圖。
 
 若未知細節會影響角色識別，提供兩個選項：使用者補充側面／背面參考，或明確允許保守補完；後者要在 Bible 與 QA 標記為推測／AI 補完。
 
@@ -55,6 +65,7 @@ description: 從一張正面角色參考圖分析角色身份、建立可重複�
 
 ```yaml
 character_id: <kebab-case-id>
+asset_mode: 2d|3d|both
 reference_confidence: high|medium|low
 reference_sources: []
 identity_anchors: []
@@ -72,6 +83,9 @@ expression_vocabulary: []
 costume: {}
 signature_accessories: []
 proportion_lock: {}
+downstream_handoff:
+  two_d: {}
+  three_d: {}
 output_requirements:
   width: <pixels>
   height: <pixels>
@@ -83,7 +97,7 @@ turnaround_requirements:
   neutral_pose: true
 ```
 
-未知欄位使用 `needs_confirmation` 或明確的 `status`，不要用看似確定的空泛敘述填滿。`allowed_variations` 只列可變項目；物種／角色定位、臉型、身體比例、主色、永久標記、招牌配件與視覺語言原則上不得變更。
+未知欄位使用 `needs_confirmation` 或明確的 `status`，不要用看似確定的空泛敘述填滿。`allowed_variations` 只列可變項目；物種／角色定位、臉型、身體比例、主色、永久標記、招牌配件與視覺語言原則上不得變更。當 `asset_mode: 2d` 時，`downstream_handoff.three_d` 可省略或設為 `enabled: false`。
 
 ## 角色基準圖生成
 
@@ -110,13 +124,13 @@ turnaround-qa.yaml
 
 ## QA 與重試
 
-逐張檢查並記錄：身份、臉型／頭部比例、身體比例、比例鎖定表的相對關係、服裝、招牌配件、主色／輔色、四分之三角度的臉部與配件連續性、角色自身左右是否正確、配件附著點是否連續、各配件在該視角的預期可見程度是否符合、前後遮擋是否合理、非對稱特徵是否依空間關係連續、側背未知細節、角色大小／基準線、單一角色、無文字／Logo／多餘道具，以及原始畫風。若任一視角出現不符合附著位置、預期可見程度或遮擋關係的元素，或非對稱特徵錯誤換側，該視角直接 `fail`，最多重試一次。
+逐張檢查並記錄：身份、臉型／頭部比例、身體比例、比例鎖定表的相對關係、服裝、招牌配件、主色／輔色、四分之三角度的臉部與配件連續性、角色自身左右是否正確、配件附著點是否連續、各配件在該視角的預期可見程度是否符合、前後遮擋是否合理、非對稱特徵是否依空間關係連續、側背未知細節、角色大小／基準線、單一角色、無文字／Logo／多餘道具，以及原始畫風。`3d` 或 `both` 模式另檢查已確認的立體結構、材質與可動部位在各視角是否自洽；未確認內容只能標為推測或待確認。若任一視角出現不符合附著位置、預期可見程度或遮擋關係的元素，或非對稱特徵錯誤換側，該視角直接 `fail`，最多重試一次。
 
 使用 [turnaround-qa-template.yaml](references/turnaround-qa-template.yaml) 記錄每個 view 的 `status: pass|fail|needs_review`、檢查項目、失敗原因、是否重試與限制。只有失敗的視角可以重試，每個視角最多一次；已通過的視角不要重生。重試後仍失敗，明確說明視角與失敗特徵，並建議補充參考圖或人工修訂，不宣稱像素級一致。
 
 ## 與 IP Asset Generator 的交接
 
-交付時把 Bible 與四張視角圖視為一個 reference pack。使用共同欄位 `identity_anchors`、`fixed_rules`、`allowed_variations`、`visual_language`、`reference_confidence`；角色轉面圖的 QA 結果只增加約束，不改寫未確認設定。後續 IP Asset Generator 應以這些檔案作為角色參考，並仍遵守其身份錨點與變化預算。
+交付時把 Bible 與四張視角圖視為一個 reference pack。使用共同欄位 `identity_anchors`、`fixed_rules`、`allowed_variations`、`visual_language`、`reference_confidence`；角色轉面圖的 QA 結果只增加約束，不改寫未確認設定。後續 IP Asset Generator 應以這些檔案作為角色參考，並仍遵守其身份錨點與變化預算。若有 3D 下游，僅交接 `downstream_handoff.three_d` 中已確認的資訊；它是建模參考，不保證自動產生 mesh 或 rig。
 
 ## 交付內容
 

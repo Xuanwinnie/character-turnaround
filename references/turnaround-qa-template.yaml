@@ -1,4 +1,5 @@
 character_id: <character-id>
+asset_mode: 2d|3d|both
 reference_confidence: high|medium|low
 overall_status: pass|fail|needs_review
 views:
@@ -17,6 +18,8 @@ views:
       scale_and_baseline: pass|fail|needs_review
       single_character_no_text: pass|fail|needs_review
       visual_language: pass|fail|needs_review
+      three_d_structure: not_applicable|pass|fail|needs_review
+      three_d_materials_and_movement: not_applicable|pass|fail|needs_review
     failure_reasons: []
     unknown_details_added: []
   three_quarter_front:

@@ -4,7 +4,7 @@
 
 A reusable Skill that turns one front-facing character reference into a confirmed Character Bible and four independent character reference images: front, three-quarter front, side, and back.
 
-It is designed for characters, mascots, branded IP, games, animation, comics, and picture books. The output is compatible with the `ip-asset-generator` Skill for creating later scenes, stickers, social graphics, and transparent character assets.
+It is designed for characters, mascots, branded IP, games, animation, comics, and picture books. The core workflow is medium-neutral: use it for 2D references, 3D modeling references, or both. The output is compatible with the `ip-asset-generator` Skill for creating later scenes, stickers, social graphics, and transparent character assets.
 
 ## What it does
 
@@ -15,6 +15,17 @@ It is designed for characters, mascots, branded IP, games, animation, comics, an
 - Generates four separate images with consistent scale, baseline, pose, and visual treatment.
 - Estimates relative proportions from the reference image to stabilize character scale, body ratio, and accessory placement.
 - Runs per-view QA and retries only a failed view once.
+- Supports an optional `asset_mode` (`2d`, `3d`, or `both`) without imposing 3D requirements on 2D workflows.
+
+## Medium-neutral workflow
+
+Choose `asset_mode: 2d|3d|both` during Character Bible planning. It does not change the four-view core workflow.
+
+- `2d` (default) prioritizes visual language, line work, color, and use in illustrations, stickers, comics, and scenes.
+- `3d` adds optional handoff notes for observable spatial structure, materials, and movable parts.
+- `both` keeps one shared identity specification while exposing optional handoff notes for both media.
+
+This Skill does not create meshes, topology, rigs, or animation. Any 3D notes are a clearly labeled reference handoff, never an invented technical specification.
 
 ## Image-only mode
 
