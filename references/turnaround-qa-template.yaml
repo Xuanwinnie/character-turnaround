@@ -61,19 +61,19 @@ spatial_feature_audit:
     contract_status: confirmed|inferred|needs_confirmation
     views:
       front:
-        expected: <數量、可見性、附著點或色段規則>
+        expected: <數量、可見性、附著點、根部／轉折點／末端投影位置、色段與地標相對關係>
         actual: <觀察結果>
         status: pass|fail|needs_review
       three_quarter_front:
-        expected: <數量、可見性、附著點或色段規則>
+        expected: <數量、可見性、附著點、根部／轉折點／末端投影位置、色段與地標相對關係>
         actual: <觀察結果>
         status: pass|fail|needs_review
       side:
-        expected: <數量、可見性、附著點或色段規則>
+        expected: <數量、可見性、附著點、根部／轉折點／末端投影位置、色段與地標相對關係>
         actual: <觀察結果>
         status: pass|fail|needs_review
       back:
-        expected: <數量、可見性、附著點或色段規則>
+        expected: <數量、可見性、附著點、根部／轉折點／末端投影位置、色段與地標相對關係>
         actual: <觀察結果>
         status: pass|fail|needs_review
     fail_conditions_triggered: []
